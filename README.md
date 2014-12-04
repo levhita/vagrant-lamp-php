@@ -10,7 +10,7 @@ Ubuntu Server 14.04, Nodejs / Redis / MongoDB
 
 * Install Vagrant
 * Install Virtual
-* Clone the repository git clone [git://github.com/joaquimserafim/vagrant-nodejs-redis-mongodb.git](git://github.com/joaquimserafim/vagrant-nodejs-redis-mongodb.git)
+* Clone the repository git clone [git://github.com/levhita/vagrant-nodejs-redis-mongodb.git](git://github.com/levhita/vagrant-nodejs-redis-mongodb.git)
 
 
 **running:**
@@ -47,6 +47,7 @@ by default this vagrantfile have this configuration for shared folder between th
 * git
 * vim htop
 * g++
+* Node Foreman
 
 
 
