@@ -70,8 +70,17 @@ class redis-cl {
   class { 'redis': }
 }
 
+class foreman {
+  exec { "install_foreman":
+    command => "npm install -g foreman",
+    path => ["/bin", "/usr/bin", "/usr/local/bin"],  
+    require => [Class["nodejs"]]
+  }
+}
+
 include apt_update
 include othertools
 include nodejs
 include mongodb
 include redis-cl
+include foreman
