@@ -21,66 +21,19 @@ class othertools {
         require => Exec["aptGetUpdate"]
     }
 
-    package { "htop":
-        ensure => present,
+}
+
+class server {
+    package { "lamp-server^":
+        ensure => latest,
         require => Exec["aptGetUpdate"]
     }
-
-    package { "g++":
-        ensure => present,
-        require => Exec["aptGetUpdate"]
+    package { "php5-gd":
+        ensure => latest,
+        require => Package["lamp-server^"]
     }
-}
-
-class nodejs {
-  exec { "git_clone_n":
-    command => "git clone https://github.com/visionmedia/n.git /home/vagrant/n",
-    path => ["/bin", "/usr/bin"],
-    require => [Exec["aptGetUpdate"], Package["git"], Package["curl"], Package["g++"]]
-  }
-
-  exec { "install_n":
-    command => "make install",
-    path => ["/bin", "/usr/bin"],
-    cwd => "/home/vagrant/n",
-    require => Exec["git_clone_n"]
-  }
-
-  exec { "install_node":
-    command => "n stable",
-    path => ["/bin", "/usr/bin", "/usr/local/bin"],  
-    require => [Exec["git_clone_n"], Exec["install_n"]]
-  }
-}
-
-class mongodb {
-  class {'::mongodb::globals':
-    manage_package_repo => true,
-    bind_ip             => ["127.0.0.1"],
-  }->
-  class {'::mongodb::server':
-    port    => 27017,
-    verbose => true,
-    ensure  => "present"
-  }->
-  class {'::mongodb::client': }
-}
-
-class redis-cl {
-  class { 'redis': }
-}
-
-class foreman {
-  exec { "install_foreman":
-    command => "npm install -g foreman",
-    path => ["/bin", "/usr/bin", "/usr/local/bin"],  
-    require => [Class["nodejs"]]
-  }
 }
 
 include apt_update
 include othertools
-include nodejs
-include mongodb
-include redis-cl
-include foreman
+include server
