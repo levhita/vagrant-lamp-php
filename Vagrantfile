@@ -21,9 +21,18 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "www", "/var/www", id: "vagrant-root",
+  config.vm.synced_folder "www", "/var/www", id: "vagrant-www",
     owner: "vagrant",
     group: "www-data",
+    mount_options: ["dmode=775,fmode=664"]
+  
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  config.vm.synced_folder "home", "/vagrant", id: "vagrant-home",
+    owner: "vagrant",
+    group: "vagrant",
     mount_options: ["dmode=775,fmode=664"]
 
   # Provider-specific configuration so you can fine-tune various
@@ -46,4 +55,8 @@ Vagrant.configure("2") do |config|
                               #'--debug',
                             ]
   end
+
+  #Post Install configurations
+  config.vm.provision :shell, :path => "vagrant/post_install.sh"
+
 end
