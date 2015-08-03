@@ -18,9 +18,6 @@ sudo sed -i 's/display_errors = .*/display_errors = On/' /etc/php5/apache2/php.i
 #Turns on short open tags
 sudo sed -i 's/short_open_tag = .*/short_open_tag = On/' /etc/php5/apache2/php.ini
 
-sudo sed -i 's/AllowOverride .*/AllowOverride All/' /etc/apache2/apache2.conf
-sudo service apache2 restart
-
 #Mysql user for external access
 mysql -u root << ENDSTRING
 CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant123';
@@ -60,6 +57,9 @@ ENDSTRING
 #Enable Site Config
 sudo rm /etc/apache2/sites-enabled/000-default.conf
 sudo a2ensite entryless.conf
+
+#Turns sets AllowOverride All for /var/www/
+sudo sed -i 's/AllowOverride .*/AllowOverride All/' /etc/apache2/apache2.conf
 
 #Restart Apache
 service apache2 restart
