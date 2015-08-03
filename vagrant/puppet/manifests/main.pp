@@ -28,10 +28,6 @@ class server {
         ensure => latest,
         require => Exec["aptGetUpdate"]
     }
-    package { "php5-gd":
-        ensure => latest,
-        require => Package["lamp-server^"]
-    }
 }
 
 include apt_update
