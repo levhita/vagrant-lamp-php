@@ -33,6 +33,9 @@ ENDSTRING
 sudo sed -i 's/bind-address.*/bind-address            = 0.0.0.0/' /etc/mysql/my.cnf
 sudo service mysql restart
 
+#Create folder for Entryless
+sudo mkdir -p /var/www/entryless
+
 #Create Site Config
 sudo sh -c "cat >> /etc/apache2/sites-available/entryless.conf" <<-ENDSTRING
 <Directory /var/www/entryless>
