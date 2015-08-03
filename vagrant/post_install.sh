@@ -8,8 +8,6 @@ sudo locale-gen en_US en_US.UTF-8
 sudo dpkg-reconfigure locales
 
 #Install and Enable missing mods
-sudo apt-get install php5-mcrypt
-sudo apt-get install php5-curl
 sudo a2enmod rewrite
 sudo a2enmod speling
 sudo php5enmod mcrypt
@@ -19,6 +17,8 @@ sudo sed -i 's/display_errors = .*/display_errors = On/' /etc/php5/apache2/php.i
 
 #Turns on short open tags
 sudo sed -i 's/short_open_tag = .*/short_open_tag = On/' /etc/php5/apache2/php.ini
+
+sudo sed -i 's/AllowOverride .*/AllowOverride All/' /etc/apache2/apache2.conf
 sudo service apache2 restart
 
 #Mysql user for external access
@@ -37,7 +37,7 @@ sudo service mysql restart
 sudo mkdir -p /var/www/entryless
 
 #Create Site Config
-sudo sh -c "cat >> /etc/apache2/sites-available/entryless.conf" <<-ENDSTRING
+sudo sh -c "cat >> /etc/apache2/sites-available/entryless.conf" <<ENDSTRING
 <Directory /var/www/entryless>
 	Options Indexes
 	AllowOverride All
@@ -58,6 +58,7 @@ sudo sh -c "cat >> /etc/apache2/sites-available/entryless.conf" <<-ENDSTRING
 ENDSTRING
 
 #Enable Site Config
+sudo rm /etc/apache2/sites-enabled/000-default.conf
 sudo a2ensite entryless.conf
 
 #Restart Apache
@@ -72,6 +73,3 @@ sudo chmod 777 /mnt/invoice-temp
 
 sudo mkdir -p /mnt/mail-volume
 sudo chmod 777 /mnt/mail-volume
-
-#Must be edited manually later!!
-touch /www/entryless/config.php
