@@ -3,7 +3,7 @@
 Vagrant configuration with puppet to create a Virtual Box machine with 
 Ubuntu Server 14.04, Lamp / PHP
 
-<h2>installation:</h2>
+<h2>Installation:</h2>
 
 <h3>Linux</h3>
 * Install Vagrant and Virtualbox
@@ -23,7 +23,7 @@ git clone -b entryless_web git://github.com/levhita/vagrant-lamp-php.git
 git clone -b entryless_web git://github.com/levhita/vagrant-lamp-php.git
 ```
 
-**running:**
+<h2>running:</h2>
 
 * Run VM (the first time the VM will be created).
 ```
@@ -38,9 +38,7 @@ vagrant ssh
 vagrant halt
 ```
 
-
-
-**development:**
+<h2>development:</h2>
 
 * You have a shared folder at *www* for your */var/www*
 * And an extra folder at *home* for *vagrant*
@@ -48,7 +46,7 @@ vagrant halt
 * IP of the server is 192.168.33.10
 * You can connect to MySQL at 192.168.33.10, Using user "vagrant" and password "vagrant123"
 
-**Puppet Manifest will install:**
+<h2>Puppet Manifest will install:</h2>
 
 * wget
 * git
@@ -56,7 +54,3 @@ vagrant halt
 * g++
 * LAMP
 * PHP5
-
-
-
-Good hacking!!!!!!!!
