@@ -35,22 +35,29 @@ sudo mkdir -p /var/www/entryless
 
 #Create Site Config
 sudo sh -c "cat >> /etc/apache2/sites-available/entryless.conf" <<ENDSTRING
-<Directory /var/www/entryless>
-	Options Indexes
-	AllowOverride All
-	IndexIgnore *
-	Order allow,deny
-	Allow from all
-	Require all granted
-	RewriteEngine on
-	RewriteBase /
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_FILENAME}.php -f
-	RewriteRule ^(.+)$ /$1.php [L,QSA] 
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/entryless
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 
-	CheckSpelling On
-	CheckCaseOnly On
+<Directory /var/www/entryless>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        IndexIgnore *
+        Order allow,deny
+        Allow from all
+        Require all granted
+        RewriteEngine on
+        RewriteBase /
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME}.php -f
+        RewriteRule ^(.+)$ /.php [L,QSA]
+
+        CheckSpelling On
+        CheckCaseOnly On
 </Directory>
 ENDSTRING
 
