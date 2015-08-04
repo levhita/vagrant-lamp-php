@@ -1,18 +1,23 @@
-<h2>Vagrant and Puppet configuration for Lamp with PHP</h2>
+<h1>Vagrant and Puppet configuration for Lamp with PHP</h1>
 
 Vagrant configuration with puppet to create a Virtual Box machine with 
 Ubuntu Server 14.04, Lamp / PHP
 
+<h2>installation:</h2>
 
-
-
-**installation:**
-
+<h3>Linux</h3>
 * Install Vagrant and Virtualbox
 ```
 sudo apt-get install virtualbox vagrant
 ```
 
+* Clone the repository:
+```
+git clone -b entryless_web git://github.com/levhita/vagrant-lamp-php.git
+```
+<h3>Mac and Windows</h3>
+* Donwload and Install Vagrant: http://www.vagrantup.com/downloads
+* Download and Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
 * Clone the repository:
 ```
 git clone -b entryless_web git://github.com/levhita/vagrant-lamp-php.git
@@ -32,6 +37,8 @@ vagrant ssh
 ```
 vagrant halt
 ```
+
+
 
 **development:**
 
