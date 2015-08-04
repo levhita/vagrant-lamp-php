@@ -8,25 +8,38 @@ Ubuntu Server 14.04, Lamp / PHP
 
 **installation:**
 
-* Install Vagrant
-* Install Virtual
-* Clone the repository git clone [git://github.com/levhita/vagrant-lamp-php.git](git://github.com/levhita/vagrant-lamp-php.git)
+* Install Vagrant and Virtualbox
+```
+sudo apt-get install virtualbox vagrant
+```
 
+* Clone the repository:
+```
+git clone -b entryless_web git://github.com/levhita/vagrant-lamp-php.git
+```
 
 **running:**
 
-* Run - vagrant up<br>
-* SSH - vagrant ssh<br>
-* Halt - vagrant halt<br>
-
+* Run VM (the first time the VM will be created).
+```
+vagrant up
+```
+* Login into the VM
+```
+vagrant ssh
+```
+* Stop the VM
+```
+vagrant halt
+```
 
 **development:**
 
-by default this vagrantfile have this configuration for shared folder between the host and the VM
-*[config.vm.synced_folder "~/www", "/var/www"]*
-
-Server is availabe at http://localhost:5000/
-
+* You have a shared folder at *www* for your */var/www*
+* And an extra folder at *home* for *vagrant*
+* Server is availabe at http://localhost:5000/
+* IP of the server is 192.168.33.10
+* You can connect to MySQL at 192.168.33.10, Using user "vagrant" and password "vagrant123"
 
 **Puppet Manifest will install:**
 
