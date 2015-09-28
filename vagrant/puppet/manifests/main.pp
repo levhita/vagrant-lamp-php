@@ -32,6 +32,14 @@ class server {
         ensure => latest,
         require => Package["lamp-server^"]
     }
+    package { "php5-mcrypt":
+        ensure => latest,
+        require => Package["lamp-server^"]
+    }
+    package { "php5-curl":
+        ensure => latest,
+        require => Package["lamp-server^"]
+    }
 }
 
 include apt_update
