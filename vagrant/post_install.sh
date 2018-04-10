@@ -7,7 +7,13 @@ sudo locale-gen en_US en_US.UTF-8
 sudo dpkg-reconfigure locales
 
 sudo apt-get update
-sudo apt-get install -y lamp-server^
+
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password vagrant123'
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password vagrant123'
+sudo apt-get -y install mysql-server-5.7
+
+
+sudo apt-get -y install  lamp-server^
 
 #Install and enable missing mods
 sudo a2enmod rewrite
@@ -15,7 +21,7 @@ sudo a2enmod rewrite
 #Allows to connect from the Host to the VM's MySQL server
 sudo sed -i 's/bind-address.*/bind-address            = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 
-sudo mysql -u root << END
+sudo mysql -u root -p"vagrant123"<< END
 CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant123';
 CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant123';
 GRANT ALL ON *.* TO 'vagrant'@'localhost';
